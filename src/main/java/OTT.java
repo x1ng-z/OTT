@@ -20,14 +20,14 @@ public interface OTT extends Library {
     boolean REMOVEITEMS(Pointer client, String itemname[], int itemlength) ;
 
 
-    void READNUM(Pointer client, String itemname[], int itemlength,Pointer buf) ;
-    void READNUMS(Pointer client, String itemname[], int itemlength,Pointer buf) ;
+    boolean READNUM(Pointer client, String itemname[], int itemlength,Pointer buf) ;
+    boolean READNUMS(Pointer client, String itemname[], int itemlength,Pointer buf) ;
 
 
     void READTEST() ;
 
 
-    void READALLREGISTERPOINTNUMS(Pointer client,Pointer buf);
+    boolean READALLREGISTERPOINTNUMS(Pointer client,Pointer buf);
 
 
     boolean WRITENUM(Pointer client, String itemname[], float itemvalue[], int itemlength);
