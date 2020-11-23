@@ -6,7 +6,7 @@ public interface OTT extends Library {
 
 
     //加载libhello.so链接库
-    OTT INSTANTCE = (OTT) Native.loadLibrary("PACKDLL2X64", OTT.class);
+    OTT INSTANTCE = (OTT) Native.loadLibrary("PACKDLL2", OTT.class);
 
 
     Pointer CONNECT(String host, String servename);

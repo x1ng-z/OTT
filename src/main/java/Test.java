@@ -11,6 +11,9 @@ public class Test {
     public static void main(String[] args) {
         Pointer opcclient = OTT.INSTANTCE.CONNECT("172.16.22.107", "KEPware.KEPServerEx.V4");
 
+        if(opcclient==null){
+            System.out.println("connect failed");
+        }
 
 //        Pointer p = new Memory(1024 * 1024);
 //        long peer = Pointer.nativeValue(p);
