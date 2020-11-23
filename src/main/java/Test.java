@@ -60,6 +60,21 @@ public class Test {
 
         float[] avalue = new float[a.length];
         boolean test = true;
+
+       // OTT.INSTANTCE.READTEST();
+
+//        Memory readovobuf=new Memory(a.length*4);
+//        readovobuf.clear();
+//        OTT.INSTANTCE.READALLREGISTERPOINTNUMS(opcclient,  readovobuf);
+//        float[] readovoresult = readovobuf.getFloatArray(0, a.length);
+//
+//        for (int i = 0; i < tmpresut.length; i++) {
+//            System.out.println(String.format("item=%s,result=%f", a[i], readovoresult[i]));
+//        }
+
+//        return;
+
+
         while (test) {
 
             try {
@@ -77,28 +92,28 @@ public class Test {
 
 
                 long readallstart = System.currentTimeMillis();
-                Memory readallbuf=new Memory(a.length*4);
-                OTT.INSTANTCE.READALLREGISTERPOINTNUMS(opcclient,readallbuf);
-                float[] readallresult=readallbuf.getFloatArray(0,a.length);
-
-                for(int i=0;i<tmpresut.length;i++){
-                    System.out.println(String.format("item=%s,result=%f",a[i],readallresult[i]));
-                }
+//                Memory readallbuf=new Memory(a.length*4);
+//                OTT.INSTANTCE.READALLREGISTERPOINTNUMS(opcclient,readallbuf);
+//                float[] readallresult=readallbuf.getFloatArray(0,a.length);
+//
+//                for(int i=0;i<tmpresut.length;i++){
+//                    System.out.println(String.format("item=%s,result=%f",a[i],readallresult[i]));
+//                }
 
 
                 //JSONObject readresultjson=JSONObject.parseObject(OTT.INSTANTCE.READNUM(opcclient, a, a.length));
                 //System.out.println(readresultjson.toJSONString());
-                System.out.println("read all cost time =" + (System.currentTimeMillis() - readallstart));
+               // System.out.println("read all cost time =" + (System.currentTimeMillis() - readallstart));
 
 
 
                 Memory readovobuf=new Memory(a.length*4);
-                readallbuf.clear();
+                readovobuf.clear();
                 OTT.INSTANTCE.READNUM(opcclient,a,a.length,readovobuf);
-                float[] readovoresult=readallbuf.getFloatArray(0,a.length);
+                float[] readovoresult=readovobuf.getFloatArray(0,a.length);
 
-                for(int i=0;i<tmpresut.length;i++){
-                    System.out.println(String.format("item=%s,result=%f",a[i],readovoresult[i]));
+                for(int i=0;i<tmpresut.length;i++) {
+                    System.out.println(String.format("item=%s,result=%f", a[i], readovoresult[i]));
                 }
 
 

@@ -21,6 +21,10 @@ public interface OTT extends Library {
 
 
     void READNUM(Pointer client, String itemname[], int itemlength,Pointer buf) ;
+    void READNUMS(Pointer client, String itemname[], int itemlength,Pointer buf) ;
+
+
+    void READTEST() ;
 
 
     void READALLREGISTERPOINTNUMS(Pointer client,Pointer buf);
