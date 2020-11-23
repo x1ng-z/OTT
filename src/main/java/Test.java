@@ -17,6 +17,9 @@ public class Test {
 //        Native..free(peer);//手动释放内存
 //        Pointer.nativeValue(p, 0);//避免Memory对象被GC时重复执行Nativ.free()方法
 
+        if(OTT.INSTANTCE. IsConnected(opcclient)==1){
+            System.out.println("Connect Success");
+        }
         String[] a = new String[]{"dcs.User.ff1",
                 "dcs.User.ff2",
                 "dcs.User.ff3",
@@ -74,8 +77,10 @@ public class Test {
 
 //        return;
 
+        int count=150;
+        while ((count--)>0) {
 
-        while (test) {
+            System.out.println("##############"+count+"##########");
 
             try {
                 long start = System.currentTimeMillis();
@@ -85,46 +90,30 @@ public class Test {
                 }
 
                 long writestart = System.currentTimeMillis();
-                if (OTT.INSTANTCE.WRITENUM(opcclient,a, avalue, a.length)) {
-                    System.out.println("write success");
+                System.out.println(OTT.INSTANTCE.WRITENUM(opcclient,a, avalue, a.length));
+                if (OTT.INSTANTCE.WRITENUM(opcclient,a, avalue, a.length)==0) {
+                    System.out.println("write failed");
+//                    break;
                 }
                 System.out.println("write cost time =" + (System.currentTimeMillis() - writestart));
 
 
                 long readallstart = System.currentTimeMillis();
-//                Memory readallbuf=new Memory(a.length*4);
-//                OTT.INSTANTCE.READALLREGISTERPOINTNUMS(opcclient,readallbuf);
-//                float[] readallresult=readallbuf.getFloatArray(0,a.length);
-//
-//                for(int i=0;i<tmpresut.length;i++){
-//                    System.out.println(String.format("item=%s,result=%f",a[i],readallresult[i]));
-//                }
+                Memory readallbuf=new Memory(a.length*4);
 
-
-                //JSONObject readresultjson=JSONObject.parseObject(OTT.INSTANTCE.READNUM(opcclient, a, a.length));
-                //System.out.println(readresultjson.toJSONString());
-               // System.out.println("read all cost time =" + (System.currentTimeMillis() - readallstart));
-
-
-
-                Memory readovobuf=new Memory(a.length*4);
-                readovobuf.clear();
-                OTT.INSTANTCE.READNUM(opcclient,a,a.length,readovobuf);
-                float[] readovoresult=readovobuf.getFloatArray(0,a.length);
-
-                for(int i=0;i<tmpresut.length;i++) {
-                    System.out.println(String.format("item=%s,result=%f", a[i], readovoresult[i]));
+                if(OTT.INSTANTCE.READNUMS(opcclient,a,a.length,readallbuf)==0){
+                    System.out.println("read error out");
+                    System.out.println("READALLREGISTERPOINTNUMS OUT******************");
+                    break;
                 }
+                float[] readnum=readallbuf.getFloatArray(0,a.length);
+                for(int i=0;i<a.length;i++){
+                    System.out.println(readnum[i]);
+                }
+                TimeUnit.MILLISECONDS.sleep(200);
+                System.out.println("##############"+count+"##########");
 
-
-                //JSONObject readresultjson=JSONObject.parseObject(OTT.INSTANTCE.READNUM(opcclient, a, a.length));
-                //System.out.println(readresultjson.toJSONString());
-                System.out.println("read ovo cost time =" + (System.currentTimeMillis() - readallstart));
-
-
-                TimeUnit.MILLISECONDS.sleep(100);
-
-
+//                System.out.println("is Connect "+OTT.INSTANTCE.IsConnected(opcclient));
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -132,8 +121,6 @@ public class Test {
             }
         }
 
-        System.out.println("ssssssssssss");
-
-
+        OTT.INSTANTCE.DISCONNECT(opcclient);
     }
 }

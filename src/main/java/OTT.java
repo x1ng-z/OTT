@@ -6,34 +6,34 @@ public interface OTT extends Library {
 
 
     //加载libhello.so链接库
-    OTT INSTANTCE = (OTT) Native.loadLibrary("PACKDLL2", OTT.class);
+    OTT INSTANTCE = (OTT) Native.loadLibrary("PACKDLL2X64", OTT.class);
 
 
     Pointer CONNECT(String host, String servename);
-
+    int IsConnected(Pointer client);
 
     void ADDITEMS(Pointer client, String itemname[], int itemlength,Pointer buf);
 
-    boolean ADDITEM(Pointer client, String itemname);
+    int ADDITEM(Pointer client, String itemname);
 
 
-    boolean REMOVEITEMS(Pointer client, String itemname[], int itemlength) ;
+    int REMOVEITEMS(Pointer client, String itemname[], int itemlength) ;
 
 
-    boolean READNUM(Pointer client, String itemname[], int itemlength,Pointer buf) ;
-    boolean READNUMS(Pointer client, String itemname[], int itemlength,Pointer buf) ;
+    int READNUM(Pointer client, String itemname[], int itemlength,Pointer buf) ;
+    int READNUMS(Pointer client, String itemname[], int itemlength,Pointer buf) ;
 
 
     void READTEST() ;
 
 
-    boolean READALLREGISTERPOINTNUMS(Pointer client,Pointer buf);
+    int READALLREGISTERPOINTNUMS(Pointer client,Pointer buf);
 
 
-    boolean WRITENUM(Pointer client, String itemname[], float itemvalue[], int itemlength);
+    int WRITENUM(Pointer client, String itemname[], float itemvalue[], int itemlength);
 
 
-    void DISCONNECT(Pointer client) ;
+    int DISCONNECT(Pointer client) ;
 
 
 }
