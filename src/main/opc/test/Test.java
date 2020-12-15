@@ -1,7 +1,9 @@
-import com.alibaba.fastjson.JSONObject;
+package opc.test;
+
 import com.sun.jna.Memory;
-import com.sun.jna.Native;
 import com.sun.jna.Pointer;
+import opc.serve.OTT;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +11,7 @@ public class Test {
 
 
     public static void main(String[] args) {
-        Pointer opcclient = OTT.INSTANTCE.CONNECT("172.16.22.107", "KEPware.KEPServerEx.V4");
+        Pointer opcclient = OTT.INSTANTCE.CONNECT("128.128.1.130", "SUPCON.JXServer.1");
 
         if(opcclient==null){
             System.out.println("connect failed");
@@ -23,31 +25,34 @@ public class Test {
         if(OTT.INSTANTCE. IsConnected(opcclient)==1){
             System.out.println("Connect Success");
         }
-        String[] a = new String[]{"dcs.User.ff1",
-                "dcs.User.ff2",
-                "dcs.User.ff3",
-                "dcs.User.ff4",
-                "dcs.User.pv1",
-                "dcs.User.pv2",
-                "dcs.User.pv3",
-                "dcs.User.mv1",
-                "dcs.User.mvfb1",
-                "dcs.Ramp.Ramp_Float",
-                "dcs.Sine.Sine1",
-                "dcs.Sine.Sine2",
-                "dcs.Sine.Sine3",
-                "dcs.Sine.Sine4",
-                "dcs.Sine.Sine5",
-                "dcs.User.ffdown1",
-                "dcs.User.ffdown2",
-                "dcs.User.ffdown3",
-                "dcs.User.ffdown4",
-                "dcs.User.ffenable1",
-                "dcs.User.ffenable2",
-                "dcs.User.fffilter1",
-                "dcs.User.fffilter2",
-                "dcs.User.fffilter3"
-        };
+        String[] a = new String[]{"A_SLM2_PV5"};
+
+//
+//        "dcs.User.ff2",
+//                "dcs.User.ff3",
+//                "dcs.User.ff4",
+//                "dcs.User.pv1",
+//                "dcs.User.pv2",
+//                "dcs.User.pv3",
+//                "dcs.User.mv1",
+//                "dcs.User.mvfb1",
+//                "dcs.Ramp.Ramp_Float",
+//                "dcs.Sine.Sine1",
+//                "dcs.Sine.Sine2",
+//                "dcs.Sine.Sine3",
+//                "dcs.Sine.Sine4",
+//                "dcs.Sine.Sine5",
+//                "dcs.User.ffdown1",
+//                "dcs.User.ffdown2",
+//                "dcs.User.ffdown3",
+//                "dcs.User.ffdown4",
+//                "dcs.User.ffenable1",
+//                "dcs.User.ffenable2",
+//                "dcs.User.fffilter1",
+//                "dcs.User.fffilter2",
+//                "dcs.User.fffilter3"
+
+
         Memory addresultbuf=new Memory(a.length);
         addresultbuf.clear();
         OTT.INSTANTCE.ADDITEMS(opcclient, a, a.length,addresultbuf);
@@ -55,7 +60,7 @@ public class Test {
         byte[] tmpresut=addresultbuf.getByteArray(0,a.length);
 
         for(int i=0;i<tmpresut.length;i++){
-            System.out.println(String.format("item=%s,result=%d",a[i],tmpresut[i]));
+            System.out.println(String.format("opc.item=%s,result=%d",a[i],tmpresut[i]));
         }
 
 
@@ -67,15 +72,15 @@ public class Test {
         float[] avalue = new float[a.length];
         boolean test = true;
 
-       // OTT.INSTANTCE.READTEST();
+       // opc.serve.OTT.INSTANTCE.READTEST();
 
 //        Memory readovobuf=new Memory(a.length*4);
 //        readovobuf.clear();
-//        OTT.INSTANTCE.READALLREGISTERPOINTNUMS(opcclient,  readovobuf);
+//        opc.serve.OTT.INSTANTCE.READALLREGISTERPOINTNUMS(opcclient,  readovobuf);
 //        float[] readovoresult = readovobuf.getFloatArray(0, a.length);
 //
 //        for (int i = 0; i < tmpresut.length; i++) {
-//            System.out.println(String.format("item=%s,result=%f", a[i], readovoresult[i]));
+//            System.out.println(String.format("opc.item=%s,result=%f", a[i], readovoresult[i]));
 //        }
 
 //        return;
@@ -113,10 +118,10 @@ public class Test {
                 for(int i=0;i<a.length;i++){
                     System.out.println(readnum[i]);
                 }
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(2000);
                 System.out.println("##############"+count+"##########");
 
-//                System.out.println("is Connect "+OTT.INSTANTCE.IsConnected(opcclient));
+//                System.out.println("is Connect "+opc.serve.OTT.INSTANTCE.IsConnected(opcclient));
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
